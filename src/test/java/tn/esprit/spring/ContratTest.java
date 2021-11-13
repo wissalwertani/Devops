@@ -27,8 +27,6 @@ public class ContratTest {
 	@Autowired
 	ContratRepository contratRepository;
 	
-	private Employe employe;
-	private Contrat contrat;
 
 	private static final Logger l = LogManager.getLogger(ContratTest.class);
 	
@@ -60,7 +58,7 @@ public class ContratTest {
 			int idc = 2;
 			int idemp = 1;
 			empl.affecterContratAEmploye(idc, idemp);
-			Contrat c =contratRepository.findById(idc).get();
+			Contrat c =contratRepository.findById(idc).orElseThrow(null);
 			Assert.assertTrue(c.getEmploye().getId()==idemp);
 			l.info("Out AffecterContratAEmploye() without errors.");	
 	      

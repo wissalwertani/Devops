@@ -3,11 +3,11 @@ package tn.esprit.spring.services;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 
 import tn.esprit.spring.entities.Contrat;
 import tn.esprit.spring.entities.Departement;
@@ -23,6 +23,7 @@ import tn.esprit.spring.repository.TimesheetRepository;
 @Service
 public class EmployeServiceImpl implements IEmployeService {
 
+	
 	@Autowired
 	EmployeRepository employeRepository;
 	@Autowired
@@ -46,8 +47,8 @@ public class EmployeServiceImpl implements IEmployeService {
 
 	@Transactional	
 	public void affecterEmployeADepartement(int employeId, int depId) {
-		Departement depManagedEntity = deptRepoistory.findById(depId).get();
-		Employe employeManagedEntity = employeRepository.findById(employeId).get();
+		Departement depManagedEntity = deptRepoistory.findById(depId).orElseThrow(null);
+		Employe employeManagedEntity = employeRepository.findById(employeId).orElseThrow(null);
 
 		if(depManagedEntity.getEmployes() == null){
 
@@ -64,7 +65,7 @@ public class EmployeServiceImpl implements IEmployeService {
 	@Transactional
 	public void desaffecterEmployeDuDepartement(int employeId, int depId)
 	{
-		Departement dep = deptRepoistory.findById(depId).get();
+		Departement dep = deptRepoistory.findById(depId).orElseThrow(null);
 
 		int employeNb = dep.getEmployes().size();
 		for(int index = 0; index < employeNb; index++){
@@ -81,27 +82,20 @@ public class EmployeServiceImpl implements IEmployeService {
 	}
 
 	public void affecterContratAEmploye(int contratId, int employeId) {
-		try
-		{
-			Contrat contratManagedEntity = contratRepoistory.findById(contratId).get();
-			Employe employeManagedEntity = employeRepository.findById(employeId).get();
-
-			contratManagedEntity.setEmploye(employeManagedEntity);
-			contratRepoistory.save(contratManagedEntity);
-
-		}catch (Exception e) {
-			
+		Contrat contratManagedEntity = contratRepoistory.findById(contratId).orElseThrow(null);
+		Employe employeManagedEntity = employeRepository.findById(employeId).orElseThrow(null);
+	         contratManagedEntity.setEmploye(employeManagedEntity);
+             contratRepoistory.save(contratManagedEntity);
 		}
-		
-	}
+
 
 	public String getEmployePrenomById(int employeId) {
-		Employe employeManagedEntity = employeRepository.findById(employeId).get();
+		Employe employeManagedEntity = employeRepository.findById(employeId).orElseThrow(null);
 		return employeManagedEntity.getPrenom();
 	}
 	public void deleteEmployeById(int employeId)
 	{
-		Employe employe = employeRepository.findById(employeId).get();
+		Employe employe = employeRepository.findById(employeId).orElseThrow(null);
 
 		//Desaffecter l'employe de tous les departements
 		//c'est le bout master qui permet de mettre a jour
@@ -114,12 +108,8 @@ public class EmployeServiceImpl implements IEmployeService {
 	}
 
 	public void deleteContratById(int contratId) {
-	   try{
-			Contrat contratManagedEntity = contratRepoistory.findById(contratId).get();
-			contratRepoistory.delete(contratManagedEntity);
-		}catch(Exception e){
-		
-		}
+		  Contrat contratManagedEntity = contratRepoistory.findById(contratId).orElseThrow(null);
+		contratRepoistory.delete(contratManagedEntity);
 
 	}
 
