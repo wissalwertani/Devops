@@ -34,37 +34,38 @@ public class ContratTest {
 	
 	@Test
 	public void tests() {
-		//ajouterEmployeTest();
-		//ajouterContratTest();
-		//affecterContratAEmployeTest();
-        //deleteContratByIdTest();
-       // deleteAllContratJPQLTest();
+		
+	  //ajouterContratTest();
+	  // affecterContratAEmployeTest();
+      deleteContratByIdTest();
+      // deleteAllContratJPQLTest();
         
 	}
 
 	public void ajouterContratTest() {
 	   try{
 			Date d = new Date();
-			Contrat c = new Contrat(d,"CDI",2000);
+			Contrat c = new Contrat(d,"CDI",3000);
 			empl.ajouterContrat(c);
 			Assert.assertTrue(c.getReference() > 0);
 			l.info("Out AjouterContrat() without errors.");	
 	      
 		}catch (Exception e) {
-		   l.error("Erreur dans l'ajout du contrat : " + e);
+		   l.error("Erreur dans l'ajout du contrat : " , e);
 		}
 	}
 
 	public void affecterContratAEmployeTest() {
 		try{
-			int idc = 1;
+			int idc = 2;
 			int idemp = 1;
 			empl.affecterContratAEmploye(idc, idemp);
-			Assert.assertEquals(this.employe.getContrat().getReference(), this.contrat.getReference());
+			Contrat c =contratRepository.findById(idc).get();
+			Assert.assertTrue(c.getEmploye().getId()==idemp);
 			l.info("Out AffecterContratAEmploye() without errors.");	
 	      
 		}catch (Exception e) {
-		   l.error("Erreur dans l'affectation du contrat : " +e);
+		   l.error("Erreur dans l'affectation du contrat : " , e);
 	    }
 	}
 
@@ -72,14 +73,14 @@ public class ContratTest {
 
 	public void deleteContratByIdTest() {
 		try{
-			int contratId = 1;
+			int contratId = 2;
 			empl.deleteContratById(contratId);
-			Optional<Contrat> cont = contratRepository.findById(this.contrat.getReference());
-			Assert.assertTrue(cont.isPresent());
+			Optional<Contrat> cont = contratRepository.findById(contratId);
+			Assert.assertFalse(cont.isPresent());
 			l.info("Out DeleteContratById() without errors.");	
 	      
 		}catch (Exception e) {
-		   l.error("Erreur dans la suppression du contrat : " +e);
+		   l.error("Erreur dans la suppression du contrat : " , e);
 	    }
 	}
 	
@@ -92,7 +93,7 @@ public class ContratTest {
 			l.info("Out deleteAllContratJPQL() without errors.");	
 			
 		}catch (Exception e) {
-		   l.error("Erreur dans la suppression du liste des contrats : " +e);
+		   l.error("Erreur dans la suppression du liste des contrats : " ,e);
 	    }
 	}
 
