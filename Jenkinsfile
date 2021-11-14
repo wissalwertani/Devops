@@ -7,7 +7,7 @@ pipeline {
                 git branch: 'wissal',
                 url:'https://github.com/wissalwertani/Devops.git';
             }
-        } stage('Test, Build'){
+        stage('Test, Build'){
 			 	steps{
 			 		bat "mvn clean install"
 			 	}				
