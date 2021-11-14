@@ -28,9 +28,9 @@ pipeline {
 
 post {
             success {
-                emailext body: 'build success' ,subject:'Jenkins' , to : 'wertani.wissal@esprit.tn'
+                emailext body: 'build success' ,subject:'Jenkins' , to : 'wertani.wissal1@esprit.tn'
             }
             failure {
-                emailext body: 'build failure' ,subject:'Jenkins' , to : 'wertani.wissal@esprit.tn'               
+                emailext body: 'build failure' ,subject:'Jenkins' , to : 'wertani.wissal1@esprit.tn'               
 }}
 }
