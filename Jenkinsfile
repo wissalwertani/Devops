@@ -8,10 +8,14 @@ pipeline {
                 url:'https://github.com/wissalwertani/Devops.git';
             }
         }
-        stage('Build and Test'){
+        stage('install'){
             steps{
-              bat "mvn package"
-              bat "mvn test"
+              bat "mvn clean install"
+            }
+        }
+        stage('Test'){
+            steps{
+              bat "mvn clean test"
             }
         }
           stage('Sonar'){
