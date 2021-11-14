@@ -7,27 +7,20 @@ pipeline {
                 git branch: 'wissal',
                 url:'https://github.com/wissalwertani/Devops.git';
             }
-        stage('Test, Build'){
-			 	steps{
-			 		bat "mvn clean install"
-			 	}				
-			 }
+        }
+        stage('Build and Test'){
+            steps{
+              bat "mvn package"
+              bat "mvn test"
+            }
+        }
+    }
 
-			stage('Package'){
-				steps{
-					bat "mvn clean package "
-					echo "Test"
-				}				
-			}
-			
-    }
- post{
-            success{
-                emailext body: 'build success', subject: 'Test Jenkins' , to: 'wertani.wissal@esprit.tn'
+post {
+            success {
+                emailext body: 'build success' ,subject:'Jenkins' , to : 'wertani.wissal@esprit.tn'
             }
-            failur{
-                emailext body: 'build failur',  subject: 'Test Jenkins' , to: 'wertani.wissal@esprit.tn'
-            }
-    }
-    
+            failure {
+                emailext body: 'build failure' ,subject:'Jenkins' , to : 'wertani.wissal@esprit.tn'               
+}}
 }
