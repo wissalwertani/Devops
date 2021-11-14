@@ -2,6 +2,15 @@ pipeline {
 	agent any
 
 	stages{
+	stages{
+		    
+		   stage('Cloning our Git') { 
+                 steps { 
+                     echo 'pulling..';
+                     git branche: 'master',
+                     bat "https://github.com/wissalwertani/Devops.git";
+                   }
+            } 
 
             
             stage('Test, Build'){
