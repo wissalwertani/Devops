@@ -1,9 +1,13 @@
 pipeline {
-	agent any
-
-	stages{
-            
-            stage('Test, Build'){
+    agent any  
+    stages{
+        stage('GIT Branch wissal'){
+            steps{
+                echo 'Pulling ...';
+                git branch: 'wissal',
+                url:'https://github.com/wissalwertani/Devops.git';
+            }
+        } stage('Test, Build'){
 			 	steps{
 			 		bat "mvn clean install"
 			 	}				
@@ -18,7 +22,9 @@ pipeline {
 			
     }
 
-     post{
+    
+}
+ post{
             success{
                 emailext body: 'build success', subject: 'Test Jenkins' , to: 'wertani.wissal@esprit.tn'
             }
@@ -27,4 +33,3 @@ pipeline {
             }
     }
  
-}
