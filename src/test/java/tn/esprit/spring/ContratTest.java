@@ -45,7 +45,7 @@ public class ContratTest {
 			Date d = new Date();
 			Contrat c = new Contrat(d,"CDI",3000);
 			empl.ajouterContrat(c);
-			Assert.assertTrue(c.getReference()>0);
+			Assert.assertTrue(c.getReference() > 0);
 			l.info("Out AjouterContrat() without errors.");	
 	      
 		}catch (Exception e) {
@@ -87,7 +87,7 @@ public class ContratTest {
 		try{
 			empl.deleteAllContratJPQL();
 			List<Contrat> cont = (List<Contrat>) contratRepository.findAll();
-			Assert.assertTrue("Erreur dans la suppression", cont.isEmpty()); 
+			Assert.assertTrue(cont.size()==0);
 			l.info("Out deleteAllContratJPQL() without errors.");	
 			
 		}catch (Exception e) {
