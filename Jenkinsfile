@@ -2,16 +2,6 @@ pipeline {
 	agent any
 
 	stages{
-	stages{
-		    
-		   stage('Cloning our Git') { 
-                 steps { 
-                     echo 'pulling..';
-                     git branche: 'master',
-                     bat "https://github.com/wissalwertani/Devops.git";
-                   }
-            } 
-
             
             stage('Test, Build'){
 			 	steps{
@@ -36,5 +26,5 @@ pipeline {
                 emailext body: 'build failur',  subject: 'Test Jenkins' , to: 'wertani.wissal@esprit.tn'
             }
     }
-	 
+ 
 }
