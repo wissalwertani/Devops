@@ -21,9 +21,6 @@ pipeline {
 			}
 			
     }
-
-    
-}
  post{
             success{
                 emailext body: 'build success', subject: 'Test Jenkins' , to: 'wertani.wissal@esprit.tn'
@@ -32,4 +29,7 @@ pipeline {
                 emailext body: 'build failur',  subject: 'Test Jenkins' , to: 'wertani.wissal@esprit.tn'
             }
     }
+    
+}
+
  
