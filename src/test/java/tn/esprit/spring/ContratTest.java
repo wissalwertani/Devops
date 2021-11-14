@@ -41,58 +41,58 @@ public class ContratTest {
 	}
 
 	public void ajouterContratTest() {
-	   try{
-			Date d = new Date();
-			Contrat c = new Contrat(d,"CDI",3000);
-			empl.ajouterContrat(c);
-			Assert.assertTrue(c.getReference() > 0);
-			l.info("Out AjouterContrat() without errors.");	
-	      
-		}catch (Exception e) {
-		   l.error("Erreur dans l'ajout du contrat : " , e);
+		   try{
+				Date d = new Date();
+				Contrat c = new Contrat(d,"CDI",3000);
+				empl.ajouterContrat(c);
+				Assert.assertTrue(c.getReference()>0);
+				l.info("Out AjouterContrat() without errors.");	
+		      
+			}catch (Exception e) {
+			   l.error("Erreur dans l'ajout du contrat : " , e);
+			}
 		}
-	}
 
-	public void affecterContratAEmployeTest() {
-		try{
-			int idc = 2;
-			int idemp = 1;
-			empl.affecterContratAEmploye(idc, idemp);
-			Contrat c =contratRepository.findById(idc).orElseThrow(null);
-			Assert.assertTrue(c.getEmploye().getId()==idemp);
-			l.info("Out AffecterContratAEmploye() without errors.");	
-	      
-		}catch (Exception e) {
-		   l.error("Erreur dans l'affectation du contrat : " , e);
-	    }
-	}
+		public void affecterContratAEmployeTest() {
+			try{
+				int idc = 2;
+				int idemp = 1;
+				empl.affecterContratAEmploye(idc, idemp);
+				Contrat c =contratRepository.findById(idc).orElseThrow(null);
+				Assert.assertTrue(c.getEmploye().getId()==idemp);
+				l.info("Out AffecterContratAEmploye() without errors.");	
+		      
+			}catch (Exception e) {
+			   l.error("Erreur dans l'affectation du contrat : " , e);
+		    }
+		}
 
-	
-
-	public void deleteContratByIdTest() {
-		try{
-			int contratId = 2;
-			empl.deleteContratById(contratId);
-			Optional<Contrat> cont = contratRepository.findById(contratId);
-			Assert.assertFalse(cont.isPresent());
-			l.info("Out DeleteContratById() without errors.");	
-	      
-		}catch (Exception e) {
-		   l.error("Erreur dans la suppression du contrat : " , e);
-	    }
-	}
-	
-	public void deleteAllContratJPQLTest() {
 		
-		try{
-			empl.deleteAllContratJPQL();
-			List<Contrat> cont = (List<Contrat>) contratRepository.findAll();
-			Assert.assertTrue(cont.size()==0);
-			l.info("Out deleteAllContratJPQL() without errors.");	
+
+		public void deleteContratByIdTest() {
+			try{
+				int contratId = 2;
+				empl.deleteContratById(contratId);
+				Optional<Contrat> cont = contratRepository.findById(contratId);
+				Assert.assertFalse(cont.isPresent());
+				l.info("Out DeleteContratById() without errors.");	
+		      
+			}catch (Exception e) {
+			   l.error("Erreur dans la suppression du contrat : " , e);
+		    }
+		}
+		
+		public void deleteAllContratJPQLTest() {
 			
-		}catch (Exception e) {
-		   l.error("Erreur dans la suppression du liste des contrats : " ,e);
-	    }
-	}
+			try{
+				empl.deleteAllContratJPQL();
+				List<Contrat> cont = (List<Contrat>) contratRepository.findAll();
+				Assert.assertTrue("Erreur dans la suppression", cont.isEmpty()); 
+				l.info("Out deleteAllContratJPQL() without errors.");	
+				
+			}catch (Exception e) {
+			   l.error("Erreur dans la suppression du liste des contrats : " ,e);
+		    }
+		}
 
 }
