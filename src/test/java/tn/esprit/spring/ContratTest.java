@@ -65,9 +65,7 @@ public class ContratTest {
 			}catch (Exception e) {
 			   l.error("Erreur dans l'affectation du contrat : " , e);
 		    }
-		}
-
-		
+		}		
 
 		public void deleteContratByIdTest() {
 			try{
