@@ -72,7 +72,7 @@ public class Employe implements Serializable {
 		this.role = role;
 	}
 	
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 

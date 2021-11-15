@@ -12,7 +12,7 @@ public class TimesheetPK implements Serializable {
 
 	private static final long serialVersionUID = 5377539445871317492L;
 
-	private int idMission;
+	private long idMission;
 	
 	private int idEmploye;
 	
@@ -28,7 +28,7 @@ public class TimesheetPK implements Serializable {
 		super();
 	}
 	
-	public TimesheetPK(int idMission, int idEmploye, Date dateDebut, Date dateFin) {
+	public TimesheetPK(long idMission, int idEmploye, Date dateDebut, Date dateFin) {
 		super();
 		this.idMission = idMission;
 		this.idEmploye = idEmploye;
@@ -47,7 +47,7 @@ public class TimesheetPK implements Serializable {
 		result = prime * result + ((dateDebut == null) ? 0 : dateDebut.hashCode());
 		result = prime * result + ((dateFin == null) ? 0 : dateFin.hashCode());
 		result = prime * result + idEmploye;
-		result = prime * result + idMission;
+		
 		return result;
 	}
 
@@ -77,7 +77,7 @@ public class TimesheetPK implements Serializable {
 		return true;
 	}
 
-	public void setIdMission(int idMission) {
+	public void setIdMission(long idMission) {
 		this.idMission = idMission;
 	}
 
@@ -105,7 +105,7 @@ public class TimesheetPK implements Serializable {
 		this.dateFin = dateFin;
 	}
 
-	public int getIdMission() {
+	public long getIdMission() {
 		return idMission;
 	}
 

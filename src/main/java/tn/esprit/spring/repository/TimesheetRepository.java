@@ -21,7 +21,7 @@ public interface TimesheetRepository extends CrudRepository<Timesheet, Integer> 
 				+ "join e.timesheets t "
 				+ "join t.mission m "
 				+ "where m.id=:misId")
-	public List<Employe> getAllEmployeByMission(@Param("misId")int missionId);
+	public List<Employe> getAllEmployeByMission(@Param("misId")long missionId);
 	
 	
 	@Query("Select t from Timesheet t "
