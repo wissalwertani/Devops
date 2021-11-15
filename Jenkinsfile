@@ -13,11 +13,11 @@ environment {
                 url:'https://github.com/wissalwertani/Devops.git';
             }
         }
-        stage('install'){
-            steps{
-              bat "mvn clean install"
-            }
-        }
+//        stage('install'){
+//            steps{
+//              bat "mvn clean install"
+//            }
+//        }
 //         stage('Test'){
 //             steps{
 //               bat "mvn clean test"
@@ -37,10 +37,11 @@ environment {
          stage('Docker') { 
                 steps { 
                     script {
-                    dockerImage = docker.build("$registry:$BUILD_NUMBER")
-                    dockerImage.push()
-                    bat "docker rmi $registry:$BUILD_NUMBER" 
-                    dockerImage.pull()
+                  //  dockerImage = docker.build("$registry:$BUILD_NUMBER")
+                   // dockerImage.push()
+                   // bat "docker rmi $registry:$BUILD_NUMBER" 
+                  //  dockerImage.pull()
+                    bat "docker container run --network timesheet-network --name timesheet-container -p 8083:8083 -d $registry:$BUILD_NUMBER"
                    
                     }
                 } 
