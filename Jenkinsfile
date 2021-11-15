@@ -38,9 +38,8 @@ environment {
                 steps { 
                     script {
                     dockerImage = docker.build("$registry:$BUILD_NUMBER")
-                    docker.withRegistry( '', registryCredential ) { 
-                        dockerImage.push() 
-                    }
+                    dockerImage.push() 
+                   
                     }
                 } 
             }
