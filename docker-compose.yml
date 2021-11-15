@@ -1,0 +1,24 @@
+version: "2.2"
+services:
+  
+  Devops:
+    container_name: devops
+    build: .\DevopsTimesheet
+    ports:
+      - "8083:8083"
+    hostname: devops
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql:mysql://localhost:3306/timeSheetDevOps?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    image: "devops"
+    depends_on:
+      - mysql
+  
+  mysql:
+    image: "mysql:5.6"
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=
+      - MYSQL_DATABASE=timeSheetDevOps
+    ports:
+      - 8081:3306
+  
+  
