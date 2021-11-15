@@ -13,11 +13,11 @@ environment {
                 url:'https://github.com/wissalwertani/Devops.git';
             }
         }
-//        stage('install'){
-//            steps{
-//              bat "mvn clean install"
-//            }
-//        }
+        stage('install'){
+            steps{
+              bat "mvn clean install"
+            }
+        }
 //         stage('Test'){
 //             steps{
 //               bat "mvn clean test"
