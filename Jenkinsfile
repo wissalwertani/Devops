@@ -36,10 +36,9 @@ environment {
 
          stage('Building our image') { 
                 steps { 
-                    script { 
-                    docker login -u wissaldevops -p 123456789
+                    script {
                     dockerImage = docker.build("$registry:$BUILD_NUMBER")
-                     docker.withRegistry( '', registryCredential ) { 
+                    docker.withRegistry( '', registryCredential ) { 
                         dockerImage.push() 
                     }
                     }
