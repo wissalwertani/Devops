@@ -39,7 +39,10 @@ environment {
          }
         
         stage('Deploy our image') {
+                func displayScanSuggestMsg(builtImages []string) {
+	if len(builtImages) <= 0 {
              steps { script { docker.withRegistry( '', registryCredential) { dockerImage.push() } } }
+        }
         }
    
         stage('Cleaning up') {
