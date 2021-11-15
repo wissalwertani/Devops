@@ -1,50 +1,43 @@
 pipeline {
-    agent any 
+
+    agent any
+
+
     stages {
-        stage('Checkout GIT') { 
+       stage ('GIT') {
             steps {
-			    echo 'Pulling...'
-				git branch: 'master',
-				url : 'https://github.com/wissalwertani/Devops.git';
+               echo "Getting Project from Git"; 
+                git branch: "Manel", 
+                    url: "https://github.com/wissalwertani/Devops.git",
+                    credentialsId: "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"; 
             }
         }
-        stage("Test, Build") {
-            steps {
-				bat """mvn clean install"""
-            }
-        }
-		        stage("Package") {
-            steps {
-				bat """mvn clean package""";
-				echo'test'
-            }
-        }
-		stage("Sonar") {
-            steps {
-				bat """mvn sonar:sonar""";
-				echo'sonar'
-            }
-        }
-		stage("Nexus") {
-            steps {
-				bat """mvn clean package -Dmaven.test.skip=true deploy:deploy-file -DgroupId=tn.esprit.spring -DartifactId=Timesheet-spring-boot-core-data-jpa-mvc-REST-1 -Dversion=0.0.1 -Dpackaging=war -DrepositoryId=deploymentRepo -Durl=http://localhost:8081/repository/maven-releases/ -Dfile=target/Timesheet-spring-boot-core-data-jpa-mvc-REST-1-0.0.1.war""";
-				echo'nexus'
-            }
-			}
-			
 
-   
-
-   
-		
-		}
-		post{
-		success{
-		emailext body: 'build success', subject: 'Jenkins', to: 'ahmed.elatti@esprit.tn'
-		}
-		failure{
-		emailext body: 'build failure', subject: 'Jenkins', to: 'ahmed.elatti@esprit.tn'
-		}
-		
+        stage("Build") {
+            steps {
+                bat "mvn -version"
+                bat "mvn clean package"
+                
+            }
+        }
+        
+        stage("Sonar") {
+            steps {
+                bat "mvn sonar:sonar"
+            }
+        }
+        
+        stage("DEPLOY") {
+            steps {
+                bat "mvn clean package -DskipTests deploy:deploy-file -DgroupId=tn.esprit.spring -DartifactId=timesheet-ci -Dversion=1.0 -DgeneratePom=true -Dpackaging=jar -DrepositoryId=deploymentRepo -Durl=http://localhost:8081/repository/maven-releases/ -Dfile=target/timesheet-ci-1.0.jar"
+            }
+        }
     }
+   
+    post {
+        always {
+            cleanWs()
+        }
+    }
+    
 }
