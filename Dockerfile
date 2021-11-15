@@ -1,4 +1,4 @@
 FROM openjdk:8
 EXPOSE 8083
-ADD /target/timesheet-0.2-SNAPSHOT.jar timesheet-0.2-SNAPSHOT.jar
-ENTRYPOINT ["java","-jar","timesheet-0.2-SNAPSHOT.jar"]
+ADD /target/Timesheet-spring-boot-core-data-jpa-mvc-REST-1-0.0.2-SNAPSHOT.war
+ENTRYPOINT ["java","-jar","Timesheet-spring-boot-core-data-jpa-mvc-REST-1-0.0.2-SNAPSHOT.war"]
