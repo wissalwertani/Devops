@@ -34,29 +34,24 @@ environment {
 //             }
 //         }
 
-         stage('Building our image') { 
+         stage('Docker') { 
                 steps { 
                     script {
                     dockerImage = docker.build("$registry:$BUILD_NUMBER")
-                    dockerImage.push() 
+                    dockerImage.push()
+                    bat "docker rmi $registry:$BUILD_NUMBER" 
+                    dockerImage.pull()
                    
                     }
                 } 
             }
-          
-           stage('Cleaning up') { 
-                steps { 
-                    bat "docker rmi $registry:$BUILD_NUMBER"  
-                }
-           } 
-
-    }
+}
 
 post {
-            success {
-                emailext body: 'build success' ,subject:'Jenkins' , to : 'wertani.wissal1@esprit.tn'
-            }
-            failure {
-                emailext body: 'build failure' ,subject:'Jenkins' , to : 'wertani.wissal1@esprit.tn'               
-}}
+               always{
+                emailext body: 'A Test EMail', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
+        
+                cleanWs()
+              }
+}
 }
