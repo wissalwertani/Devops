@@ -17,7 +17,7 @@ public class EntrepriseServiceImpl implements IEntrepriseService {
 	@Autowired
     EntrepriseRepository entrepriseRepoistory;
 	@Autowired
-	DepartementRepository deptRepoistory;
+	DepartementRepository departmentRepoistory;
 	
 	public int ajouterEntreprise(Entreprise entreprise) {
 		entrepriseRepoistory.save(entreprise);
@@ -25,27 +25,22 @@ public class EntrepriseServiceImpl implements IEntrepriseService {
 	}
 
 	public int ajouterDepartement(Departement dep) {
-		deptRepoistory.save(dep);
+		departmentRepoistory.save(dep);
 		return dep.getId();
 	}
 	
 	public void affecterDepartementAEntreprise(int depId, int entrepriseId) {
-		//Le bout Master de cette relation N:1 est departement  
-				//donc il faut rajouter l'entreprise a departement 
-				// ==> c'est l'objet departement(le master) qui va mettre a jour l'association
-				//Rappel : la classe qui contient mappedBy represente le bout Slave
-				//Rappel : Dans une relation oneToMany le mappedBy doit etre du cote one.
 		Optional<Entreprise> entrepriseOpt = entrepriseRepoistory.findById(entrepriseId);
 		Entreprise entreprise = null;
 		if (entrepriseOpt.isPresent())
 			entreprise = entrepriseOpt.get();
-		Optional<Departement> departementOpt = deptRepoistory.findById(depId);
+		Optional<Departement> departementOpt = departmentRepoistory.findById(depId);
 		Departement departement = null;
 		if (departementOpt.isPresent())
 			departement = departementOpt.get();
 		if (departement != null){		
 		    departement.setEntreprise(entreprise);
-	        deptRepoistory.save(departement);
+	        departmentRepoistory.save(departement);
 	        }
 		
 	}
@@ -77,12 +72,12 @@ public class EntrepriseServiceImpl implements IEntrepriseService {
 
 	@Transactional
 	public void deleteDepartementById(int depId) {
-		Optional<Departement> departementOpt = deptRepoistory.findById(depId);
+		Optional<Departement> departementOpt = departmentRepoistory.findById(depId);
 		Departement departement = null;
 		if (departementOpt.isPresent())
 			departement = departementOpt.get();
 		if (departement != null)
-			deptRepoistory.delete(departement);		
+			departmentRepoistory.delete(departement);		
 	}
 
 

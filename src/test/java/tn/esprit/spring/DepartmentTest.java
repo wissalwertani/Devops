@@ -14,7 +14,6 @@ import tn.esprit.spring.entities.Departement;
 import tn.esprit.spring.entities.Entreprise;
 import tn.esprit.spring.repository.DepartementRepository;
 import tn.esprit.spring.repository.EntrepriseRepository;
-import tn.esprit.spring.services.IEmployeService;
 import tn.esprit.spring.services.IEntrepriseService;
 
 @RunWith(SpringRunner.class)
@@ -22,9 +21,6 @@ import tn.esprit.spring.services.IEntrepriseService;
 public class DepartmentTest {
 	
 private static final Logger L = LogManager.getLogger(DepartmentTest.class);
-	
-	@Autowired
-	IEmployeService empl ;
 	
 	@Autowired
 	IEntrepriseService ent ;
