@@ -41,7 +41,7 @@ environment {
                     dockerImage.push()
                     bat "docker rmi $registry:$BUILD_NUMBER" 
                     dockerImage.pull()
-                    dockerImage.run()
+                    //dockerImage.run()
                     }
                 } 
             }
