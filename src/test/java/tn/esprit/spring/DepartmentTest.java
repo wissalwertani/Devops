@@ -106,5 +106,7 @@ private static final Logger L = LogManager.getLogger(DepartmentTest.class);
 		ent.deleteDepartementById(depId2);
 		ent.deleteEntrepriseById(idEnt);
 	}
+	
+	//TestJenkins
 
 }
