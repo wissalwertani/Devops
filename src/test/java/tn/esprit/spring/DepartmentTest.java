@@ -46,7 +46,7 @@ private static final Logger L = LogManager.getLogger(DepartmentTest.class);
 		Departement d = depRep.findById(depId).orElse(null);
 		if(d != null){
 			Assert.assertTrue(d.getName().equals("Devops1"));
-			L.info("Entreprise added successfully!");
+			L.info("department added successfully!");
 			ent.deleteDepartementById(depId);
 		}else{
 			L.info("Data not Found");
