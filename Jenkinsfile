@@ -41,7 +41,7 @@ environment {
                     dockerImage.push()
                     bat "docker rmi $registry:$BUILD_NUMBER" 
                     dockerImage.pull()
-                    bat "docker container run --network timesheet-network --name timesheet-container -p 8083:8083 -d $registry:$BUILD_NUMBER"
+                   dockerImage.run()
                    
                     }
                 } 
@@ -49,10 +49,11 @@ environment {
 }
 
 post {
-               always{
-                emailext body: 'A Test EMail', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
-        
-                cleanWs()
-              }
+              success{
+		emailext body: 'build success', subject: 'Jenkins', to: 'wertani.wissal@esprit.tn'
+		}
+		failure{
+		emailext body: 'build failure', subject: 'Jenkins', to: 'wertani.wissal@esprit.tn'
+		}
 }
 }
